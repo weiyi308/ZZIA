@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra("url", HttpUtil.GetCookieUrl(url)+foot);
                 intent.putExtra("header",url);
                 intent.putExtra("id",userid);
-                System.out.println(url);
+                //System.out.println(url);
                 startActivity(intent);
             }
         });

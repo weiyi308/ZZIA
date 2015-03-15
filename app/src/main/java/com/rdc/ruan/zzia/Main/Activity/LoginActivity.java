@@ -248,18 +248,17 @@ public class LoginActivity extends Activity{
             // TODO: attempt authentication against a network service.
             DefaultHttpClient client = new DefaultHttpClient();
             // 此处先获取页面，读取到value值为post做准备
-            String __VIEWSTATE = "";
+            //String __VIEWSTATE = "";
 
 
             List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
             pairs.add(new BasicNameValuePair("__VIEWSTATE", "dDwyODE2NTM0OTg7Oz4egbL55hZdXDEySb4xyhjc5fd+ig=="));
-            System.out.println("__VIEWSTATE" + __VIEWSTATE);
             pairs.add(new BasicNameValuePair("txtUserName", mUser));
             pairs.add(new BasicNameValuePair("TextBox2", mPassword));
-            pairs.add(new BasicNameValuePair("RadioButtonList1", "%D1%A7%C9%FA"));
+            //pairs.add(new BasicNameValuePair("RadioButtonList1", "%D1%A7%C9%FA"));
             pairs.add(new BasicNameValuePair("Button1", ""));
             pairs.add(new BasicNameValuePair("lbLanguage", ""));
-            pairs.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", "92719903"));
+            //pairs.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", "92719903"));
             pairs.add(new BasicNameValuePair("txtSecretCode",code_txt.getText().toString()));
             String info = "";
             try {
