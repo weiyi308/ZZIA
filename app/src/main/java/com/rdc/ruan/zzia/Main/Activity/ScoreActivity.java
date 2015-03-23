@@ -68,7 +68,7 @@ public class ScoreActivity extends ActionBarActivity {
                 scorePostTask.setCallbackListener(new CallbackListener() {
                     @Override
                     public Object Return(Object result) {
-                        textView.setText((String)result);
+                        textView.setText(MyJsoup.getTable((String )result));
                         return null;
                     }
                 });

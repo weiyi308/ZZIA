@@ -11,6 +11,22 @@ import org.jsoup.select.Elements;
  */
 public class MyJsoup {
     /**
+     * 获取成绩表
+     */
+    public static String getTable(String string){
+        Document document = Jsoup.parse(string);
+        Element element = document.select("table.datelist").first();
+        String result=element.html();
+        return result;
+    }
+
+    public static String getCetTable(String string){
+        Document document = Jsoup.parse(string);
+        Element element = document.select("table.cetTable").first();
+        String result=element.html();
+        return result;
+    }
+    /**
      * 获取名字
      * @param string
      * @return

@@ -16,6 +16,7 @@ import com.rdc.ruan.zzia.Main.R;
 public class MainActivity extends ActionBarActivity {
     TextView textView;
     Button btn_score,btn_restart;
+    Button btn_cet,btn_cTable;
     String temp;
     String name;
     String userid;
@@ -27,6 +28,10 @@ public class MainActivity extends ActionBarActivity {
         textView = (TextView)findViewById(R.id.textview);
         btn_score = (Button)findViewById(R.id.btn_score);
         btn_restart = (Button)findViewById(R.id.restart);
+        btn_cet=(Button)findViewById(R.id.btn_cet);
+        btn_cTable=(Button)findViewById(R.id.classtable);
+
+
         temp="";
         Bundle bundle =getIntent().getExtras();
         content = bundle.getString("content");
@@ -46,6 +51,26 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra("header",url);
                 intent.putExtra("id",userid);
                 //System.out.println(url);
+                startActivity(intent);
+            }
+        });
+        btn_cet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,
+                        CetActivity.class));
+            }
+        });
+        btn_cTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,
+                        ClassTableActivity.class);
+                intent.putExtra("url",
+                        HttpUtil.GetCookieUrl(url)+
+                                "xsxkqk.aspx?xh="+
+                                userid+"&xm="+
+                                name+"&gnmkdm=N121616");
                 startActivity(intent);
             }
         });
