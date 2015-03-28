@@ -19,17 +19,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/actionbar_bg"/>
             <ImageView
                 android:layout_margin="0dp"
                 android:padding="0dp"
-                android:layout_width="match_parent"
-                android:scaleType="fitStart"
+                android:layout_width="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/logo"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo"/>
-            <EditText android:id="@+id/user" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:hint="@string/edit_user"
-                android:inputType="number" android:maxLines="1"
+                android:background="@color/actionbar_bg"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/actionbar_bg"/>
+            <AutoCompleteTextView android:id="@+id/user"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_user"
+                android:inputType="number"
+                android:maxLines="1"
                 android:singleLine="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>
@@ -45,8 +57,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-                <RelativeLayout
+                android:layout_marginRight="16dp"
+                android:gravity="center">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rad_rember"
+                    android:layout_gravity="center"
+                    android:text="记住密码"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rad_auto"
+                    android:text="自动登录"
+                    />
+                <!--<RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -75,7 +100,7 @@
                     android:layout_weight="1"
                     android:maxLines="1" android:singleLine="true"
                     android:inputType="text"
-                    android:id="@+id/code_txt"/>
+                    android:id="@+id/code_txt"/>-->
             </LinearLayout>
 
             <Button android:id="@+id/email_sign_in_button"

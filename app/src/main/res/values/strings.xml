@@ -6,8 +6,12 @@
     <string name="action_settings">设置</string>
     <string name="title_activity_main">郑航</string>
     <string name="title_activity_score">成绩查询</string>
-    <string name="title_activity_cet">CetActivity</string>
+    <string name="title_activity_cet">四六级查询</string>
     <string name="activity_cet_cx">查询</string>
-    <string name="title_activity_class_table">ClassTableActivity</string>
+    <string name="title_activity_class_table">课表查询</string>
+
+    <color name="actionbar_bg">#1874BF</color>
+    <color name="background">#eeeeee</color>
+    <color name="btn_color">#e0e0e0</color>
 
 </resources>

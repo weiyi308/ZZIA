@@ -1,9 +1,11 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.rdc.ruan.zzia.Main.AsyncTask.ImageTask;
@@ -33,7 +35,7 @@ import java.util.List;
 
 
 /**
- * A login screen that offers login via email/password.
+ * 登录界面
  */
 public class LoginActivity extends Activity{
 
@@ -47,21 +49,24 @@ public class LoginActivity extends Activity{
     private ImageTask imageTask;
     private View view;
     private ProgressDialog progressDialog;
-    private ProgressBar progressBar;
+    private RadioButton btn_radio;
 
     private String url;
+    private String userid,password;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
         // Set up the login form.
         mUserView = (EditText) findViewById(R.id.user);
-        code_txt = (EditText)findViewById(R.id.code_txt);
+        //code_txt = (EditText)findViewById(R.id.code_txt);
         mPasswordView = (EditText) findViewById(R.id.password);
         imageView = (ImageView)findViewById(R.id.image);
         view = findViewById(R.id.login_form);
-        progressBar = (ProgressBar)findViewById(R.id.progress);
+        //progressBar = (ProgressBar)findViewById(R.id.progress);
+        btn_radio = (RadioButton) findViewById(R.id.rad_rember);
         imageTask =null;
 
         UrlTask urlTask = new UrlTask("http://202.196.166.138");
@@ -69,21 +74,37 @@ public class LoginActivity extends Activity{
             @Override
             public Object Return(Object result) {
                 url = (String)result;
+
                 if (url.length()<50){
                     Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                 }else {
-                    eImageTask();
+                    //eImageTask();
+                }
+                SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+                String userid=preferences.getString("userid", "");
+                String password=preferences.getString("password", "");
+                if (!userid.isEmpty()&&!password.isEmpty()){
+                    mUserView.setText(userid);
+                    mPasswordView.setText(password);
+                    //preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("userid", userid);
+                    editor.putString("password", password);
+                    editor.commit();
+                    mAuthTask = new UserLoginTask(userid, password);
+                    progressDialog = ProgressDialog.show(LoginActivity.this,"正在登录...","请稍候",true,false);
+                    mAuthTask.execute((Void) null);
                 }
                 return null;
             }
         });
         urlTask.execute();
-        imageView.setOnClickListener(new OnClickListener() {
+        /*imageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 eImageTask();
             }
-        });
+        });*/
         final Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -108,7 +129,7 @@ public class LoginActivity extends Activity{
                 return false;
             }
         });
-        view.setOnTouchListener(new View.OnTouchListener() {
+        /*view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()){
@@ -118,16 +139,8 @@ public class LoginActivity extends Activity{
                 }
                 return false;
             }
-        });
+        });*/
 
-    }
-
-
-
-    public void eImageTask(){
-        imageTask =new ImageTask(url,imageView,progressBar);
-        progressBar.setVisibility(View.VISIBLE);
-        imageTask.execute();
     }
 
     /**
@@ -147,9 +160,9 @@ public class LoginActivity extends Activity{
         mUserView.requestFocus();
 
         // Store values at the time of the login attempt.
-        String user = mUserView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        if (!isUserValid(user)){
+        userid = mUserView.getText().toString();
+        password = mPasswordView.getText().toString();
+        if (!isUserValid(userid)){
             mUserView.setError(getString(R.string.error_invalid_user));
             mUserView.requestFocus();
         }else if (isEmptyPassword(password)){
@@ -158,12 +171,12 @@ public class LoginActivity extends Activity{
         }else if (!isPasswordValid(password)){
             mPasswordView.setError(getString(R.string.error_short_password));
             mPasswordView.requestFocus();
-        }else if (isEmptyCode(code_txt.getText().toString())){
+        }/*else if (isEmptyCode(code_txt.getText().toString())){
             code_txt.setError("验证码为空");
             code_txt.requestFocus();
-        }
+        }*/
         else {
-            mAuthTask = new UserLoginTask(user, password);
+            mAuthTask = new UserLoginTask(userid, password);
             progressDialog = ProgressDialog.show(LoginActivity.this,"正在登录...","请稍候",true,false);
             mAuthTask.execute((Void) null);
 
@@ -179,24 +192,29 @@ public class LoginActivity extends Activity{
             code_txt.setText("");
             if (imageTask!=null)
                 imageTask=null;
-            eImageTask();
+            //eImageTask();
             Toast.makeText(LoginActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
         }else if (result.indexOf("密码错误")!=-1) {
             progressDialog.dismiss();
             code_txt.setText("");
             if (imageTask!=null)
                 imageTask=null;
-            eImageTask();
+            //eImageTask();
             Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
-        }else if (result.indexOf("验证码不正确")!=-1){
+        }/*else if (result.indexOf("验证码不正确")!=-1){
             progressDialog.dismiss();
             code_txt.setText("");
             if (imageTask!=null)
                 imageTask=null;
-            eImageTask();
+            //eImageTask();
             Toast.makeText(LoginActivity.this,"验证码不正确",Toast.LENGTH_SHORT).show();
-        }
+        }*/
         else {
+            SharedPreferences preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.putString("userid", userid);
+            editor.putString("password", password);
+            editor.commit();
             Bundle bundle = new Bundle();
             bundle.putString("url",url);
             bundle.putString("content",result);
@@ -221,9 +239,6 @@ public class LoginActivity extends Activity{
     }
     private boolean isEmptyPassword(String password){
         return password.isEmpty();
-    }
-    private boolean isEmptyCode(String code){
-        return code.isEmpty();
     }
     /**
      * Shows the progress UI and hides the login form.
@@ -259,7 +274,8 @@ public class LoginActivity extends Activity{
             pairs.add(new BasicNameValuePair("Button1", ""));
             pairs.add(new BasicNameValuePair("lbLanguage", ""));
             //pairs.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", "92719903"));
-            pairs.add(new BasicNameValuePair("txtSecretCode",code_txt.getText().toString()));
+            //pairs.add(new BasicNameValuePair("txtSecretCode",code_txt.getText().toString()));
+            pairs.add(new BasicNameValuePair("txtSecretCode",""));
             String info = "";
             try {
                 info = HttpUtil.postUrl(url,

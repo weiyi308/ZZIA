@@ -1,8 +1,10 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +14,12 @@ import android.widget.TextView;
 import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
 import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
 import com.rdc.ruan.zzia.Main.R;
+import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 
-public class MainActivity extends ActionBarActivity {
+/**
+ * 主界面
+ */
+public class MainActivity extends Activity {
     TextView textView;
     Button btn_score,btn_restart;
     Button btn_cet,btn_cTable;
@@ -25,11 +31,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InitStatusBar.InitStatusBar(this);
         textView = (TextView)findViewById(R.id.textview);
         btn_score = (Button)findViewById(R.id.btn_score);
         btn_restart = (Button)findViewById(R.id.restart);
         btn_cet=(Button)findViewById(R.id.btn_cet);
         btn_cTable=(Button)findViewById(R.id.classtable);
+
 
 
         temp="";
@@ -39,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
         url=bundle.getString("url");
         name= MyJsoup.getName(content);
         setTitle(name);
+        MyJsoup.setMainUrl(HttpUtil.GetCookieUrl(url)+"xs_main.aspx?xh="+userid);
         name=name.replace("同学","");
         btn_score.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +86,11 @@ public class MainActivity extends ActionBarActivity {
         btn_restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString("userid", "");
+                editor.putString("password", "");
+                editor.commit();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 finish();
             }

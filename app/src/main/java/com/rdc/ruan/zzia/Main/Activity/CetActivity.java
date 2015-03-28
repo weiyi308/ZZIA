@@ -1,7 +1,7 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -10,8 +10,12 @@ import android.widget.Toast;
 
 import com.rdc.ruan.zzia.Main.AsyncTask.CetTask;
 import com.rdc.ruan.zzia.Main.R;
+import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 
-public class CetActivity extends ActionBarActivity {
+/**
+ * 四六级查询
+ */
+public class CetActivity extends Activity {
     EditText cetid,name;
     String txt_cetid,txt_name;
     TextView textView;
@@ -22,6 +26,7 @@ public class CetActivity extends ActionBarActivity {
         cetid =(EditText)findViewById(R.id.cetid);
         name=(EditText)findViewById(R.id.name);
         textView=(TextView)findViewById(R.id.textview);
+        InitStatusBar.InitStatusBar(this);
     }
 
 

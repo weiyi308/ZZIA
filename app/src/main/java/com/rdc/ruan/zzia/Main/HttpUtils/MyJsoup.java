@@ -11,6 +11,22 @@ import org.jsoup.select.Elements;
  */
 public class MyJsoup {
     /**
+     * 获取课程表
+     */
+    private static String mainUrl;
+    public static void setMainUrl(String str){
+        mainUrl=str;
+    }
+    public static String getMainUrl(){
+        return mainUrl;
+    }
+    public static String getClassTable(String string){
+        Document document = Jsoup.parse(string);
+        Element element = document.select("table.datelist").first();
+        String result=element.html();
+        return result;
+    }
+    /**
      * 获取成绩表
      */
     public static String getTable(String string){

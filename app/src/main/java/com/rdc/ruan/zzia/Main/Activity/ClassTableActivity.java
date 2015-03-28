@@ -1,36 +1,53 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.rdc.ruan.zzia.Main.AsyncTask.ClassTableTask;
+import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
+import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 import com.rdc.ruan.zzia.Main.R;
+import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 
-public class ClassTableActivity extends ActionBarActivity {
+/**
+ * 课程表查询
+ */
+public class ClassTableActivity extends Activity {
     String url;
     String selectedYear,SelectedTerm;
     Spinner sp1,sp2;
+    Button btn_cx;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_table);
+        InitStatusBar.InitStatusBar(this);
         url=getIntent().getStringExtra("url");
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);
-
-        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        btn_cx = (Button)findViewById(R.id.btn_cx);
+        textView = (TextView)findViewById(R.id.textview);
+        btn_cx.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onClick(View view) {
+                ClassTableTask classTableTask = new ClassTableTask(url,
+                        "2014-2015",
+                        "2");
+                classTableTask.setCallbackListener(new CallbackListener() {
+                    @Override
+                    public Object Return(Object result) {
+                        textView.setText(MyJsoup.getClassTable((String)result));
+                        return null;
+                    }
+                });
+                classTableTask.execute();
             }
         });
     }
