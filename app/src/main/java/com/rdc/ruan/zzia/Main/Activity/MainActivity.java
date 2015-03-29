@@ -31,14 +31,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        InitStatusBar.InitStatusBar(this);
+        InitStatusBar.InitStatusBar(this,getWindow(),true);
         textView = (TextView)findViewById(R.id.textview);
         btn_score = (Button)findViewById(R.id.btn_score);
         btn_restart = (Button)findViewById(R.id.restart);
         btn_cet=(Button)findViewById(R.id.btn_cet);
         btn_cTable=(Button)findViewById(R.id.classtable);
-
-
 
         temp="";
         Bundle bundle =getIntent().getExtras();
@@ -86,7 +84,7 @@ public class MainActivity extends Activity {
         btn_restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+                SharedPreferences preferences=getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putString("userid", "");
                 editor.putString("password", "");

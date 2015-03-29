@@ -10,7 +10,8 @@
     <string name="activity_cet_cx">查询</string>
     <string name="title_activity_class_table">课表查询</string>
 
-    <color name="actionbar_bg">#1874BF</color>
+    <color name="zzia">#1874BF</color>
+    <color name="actionbar_bg">#e0e0e0</color>
     <color name="background">#eeeeee</color>
     <color name="btn_color">#e0e0e0</color>
 

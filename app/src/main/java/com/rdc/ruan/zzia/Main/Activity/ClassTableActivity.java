@@ -28,7 +28,7 @@ public class ClassTableActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_table);
-        InitStatusBar.InitStatusBar(this);
+        InitStatusBar.InitStatusBar(this,getWindow(),true);
         url=getIntent().getStringExtra("url");
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);

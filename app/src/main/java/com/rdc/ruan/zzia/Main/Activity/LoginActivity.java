@@ -66,7 +66,7 @@ public class LoginActivity extends Activity{
         imageView = (ImageView)findViewById(R.id.image);
         view = findViewById(R.id.login_form);
         //progressBar = (ProgressBar)findViewById(R.id.progress);
-        btn_radio = (RadioButton) findViewById(R.id.rad_rember);
+        //btn_radio = (RadioButton) findViewById(R.id.rad_rember);
         imageTask =null;
 
         UrlTask urlTask = new UrlTask("http://202.196.166.138");
@@ -80,31 +80,26 @@ public class LoginActivity extends Activity{
                 }else {
                     //eImageTask();
                 }
-                SharedPreferences preferences=getSharedPreferences("user", Context.MODE_PRIVATE);
+                SharedPreferences preferences=getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                 String userid=preferences.getString("userid", "");
                 String password=preferences.getString("password", "");
                 if (!userid.isEmpty()&&!password.isEmpty()){
                     mUserView.setText(userid);
                     mPasswordView.setText(password);
                     //preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=preferences.edit();
+                    /*SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("userid", userid);
                     editor.putString("password", password);
                     editor.commit();
+                    */
                     mAuthTask = new UserLoginTask(userid, password);
-                    progressDialog = ProgressDialog.show(LoginActivity.this,"正在登录...","请稍候",true,false);
+                    progressDialog = ProgressDialog.show(LoginActivity.this,"自动登录...","请稍候",true,false);
                     mAuthTask.execute((Void) null);
                 }
                 return null;
             }
         });
         urlTask.execute();
-        /*imageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eImageTask();
-            }
-        });*/
         final Button mSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -210,11 +205,14 @@ public class LoginActivity extends Activity{
             Toast.makeText(LoginActivity.this,"验证码不正确",Toast.LENGTH_SHORT).show();
         }*/
         else {
-            SharedPreferences preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
+            SharedPreferences preferences=getApplicationContext().getSharedPreferences("user",Context.MODE_PRIVATE);
             SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("userid", userid);
-            editor.putString("password", password);
-            editor.commit();
+            if (preferences.getString("userid","").isEmpty()){
+                editor.putString("userid", userid);
+                editor.putString("password", password);
+                editor.commit();
+            }
+
             Bundle bundle = new Bundle();
             bundle.putString("url",url);
             bundle.putString("content",result);

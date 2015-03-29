@@ -5,7 +5,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.rdc.ruan.zzia.Main.Activity.LoginActivity">
+    tools:context="com.rdc.ruan.zzia.Main.Activity.LoginActivity"
+    android:background="@color/background">
 
     <!-- Login progress -->
     <ScrollView android:id="@+id/login_form"
@@ -22,7 +23,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/actionbar_bg"/>
+                android:background="@color/zzia"/>
             <ImageView
                 android:layout_margin="0dp"
                 android:padding="0dp"
@@ -30,11 +31,11 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/logo"
                 android:layout_height="wrap_content"
-                android:background="@color/actionbar_bg"/>
+                android:background="@color/zzia"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/actionbar_bg"/>
+                android:background="@color/zzia"/>
             <AutoCompleteTextView android:id="@+id/user"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
@@ -52,7 +53,7 @@
                 android:maxLines="1" android:singleLine="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -71,37 +72,7 @@
                     android:id="@+id/rad_auto"
                     android:text="自动登录"
                     />
-                <!--<RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/image"
-                        android:scaleType="fitCenter"
-
-                        />
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="?android:attr/progressBarStyleSmall"
-                        android:id="@+id/progress"
-                        android:layout_centerInParent="true"
-                        />
-                </RelativeLayout>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="1" android:singleLine="true"
-                    android:inputType="text"
-                    android:id="@+id/code_txt"/>-->
-            </LinearLayout>
+            </LinearLayout>-->
 
             <Button android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"

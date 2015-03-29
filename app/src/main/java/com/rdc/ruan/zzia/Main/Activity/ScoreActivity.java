@@ -48,7 +48,7 @@ public class ScoreActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         //textView=(TextView)findViewById(R.id.textview);
-        InitStatusBar.InitStatusBar(this);
+        InitStatusBar.InitStatusBar(this,getWindow(),true);
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);
         btn_cx=(Button)findViewById(R.id.btn_cx);

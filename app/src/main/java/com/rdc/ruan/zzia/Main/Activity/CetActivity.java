@@ -26,8 +26,9 @@ public class CetActivity extends Activity {
         cetid =(EditText)findViewById(R.id.cetid);
         name=(EditText)findViewById(R.id.name);
         textView=(TextView)findViewById(R.id.textview);
-        InitStatusBar.InitStatusBar(this);
+        InitStatusBar.InitStatusBar(this,getWindow(),true);
     }
+
 
 
     @Override
