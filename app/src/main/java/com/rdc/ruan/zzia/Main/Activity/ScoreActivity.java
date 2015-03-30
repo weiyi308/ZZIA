@@ -1,9 +1,13 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
 import android.app.Activity;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -54,7 +58,7 @@ public class ScoreActivity extends Activity {
         btn_cx=(Button)findViewById(R.id.btn_cx);
         webView = (WebView) findViewById(R.id.webview);
 
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         url=intent.getStringExtra("url");
         header=intent.getStringExtra("header");
@@ -160,7 +164,27 @@ public class ScoreActivity extends Activity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_score,menu);
+        return true;
+    }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                    TaskStackBuilder.create(this)
+                            .addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+                } else {
+                    upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    NavUtils.navigateUpTo(this, upIntent);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

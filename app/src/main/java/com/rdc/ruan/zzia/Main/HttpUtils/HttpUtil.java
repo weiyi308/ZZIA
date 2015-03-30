@@ -50,14 +50,18 @@ public class HttpUtil {
      */
 
 
+    /**
+     * 根据ip地址获取url
+     * @param str
+     * @return
+     * @throws Exception
+     */
     public static String GetRealUrl(String str) throws Exception {
         URL url = new URL(str);
         HttpURLConnection conn=(HttpURLConnection)url.openConnection();
         conn.getResponseCode();
         String realUrl=conn.getURL().toString();
         conn.disconnect();
-
-        //System.out.println("真实URL:"+realUrl);
         return realUrl;
     }
 

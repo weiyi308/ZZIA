@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.StringRequest;
 import com.rdc.ruan.zzia.Main.AsyncTask.ImageTask;
 import com.rdc.ruan.zzia.Main.AsyncTask.UrlTask;
 import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
@@ -53,6 +54,7 @@ public class LoginActivity extends Activity{
 
     private String url;
     private String userid,password;
+    private StringRequest stringRequest;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,23 +81,25 @@ public class LoginActivity extends Activity{
                     Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                 }else {
                     //eImageTask();
-                }
-                SharedPreferences preferences=getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-                String userid=preferences.getString("userid", "");
-                String password=preferences.getString("password", "");
-                if (!userid.isEmpty()&&!password.isEmpty()){
-                    mUserView.setText(userid);
-                    mPasswordView.setText(password);
-                    //preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
+                    SharedPreferences preferences=getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                    String userid=preferences.getString("userid", "");
+                    String password=preferences.getString("password", "");
+                    if (!userid.isEmpty()&&!password.isEmpty()){
+                        mUserView.setText(userid);
+                        mPasswordView.setText(password);
+                        //preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
                     /*SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("userid", userid);
                     editor.putString("password", password);
                     editor.commit();
                     */
-                    mAuthTask = new UserLoginTask(userid, password);
-                    progressDialog = ProgressDialog.show(LoginActivity.this,"自动登录...","请稍候",true,false);
-                    mAuthTask.execute((Void) null);
+                        mAuthTask = new UserLoginTask(userid, password);
+                        progressDialog = ProgressDialog.show(LoginActivity.this,"自动登录...","请稍候",true,false);
+                        mAuthTask.execute((Void) null);
+                    }
+
                 }
+
                 return null;
             }
         });
@@ -273,7 +277,19 @@ public class LoginActivity extends Activity{
             pairs.add(new BasicNameValuePair("lbLanguage", ""));
             //pairs.add(new BasicNameValuePair("__VIEWSTATEGENERATOR", "92719903"));
             //pairs.add(new BasicNameValuePair("txtSecretCode",code_txt.getText().toString()));
-            pairs.add(new BasicNameValuePair("txtSecretCode",""));
+            //pairs.add(new BasicNameValuePair("txtSecretCode",""));
+
+            /*Map<String ,String> pairs = new HashMap<>();
+            pairs.put("__VIEWSTATE", "dDwyODE2NTM0OTg7Oz4egbL55hZdXDEySb4xyhjc5fd+ig==");
+            pairs.put("txtUserName", "121006222");
+            pairs.put("TextBox2", "asdf358164324");
+            pairs.put("RadioButtonList1", "%D1%A7%C9%FA");
+            pairs.put("Button1", "");
+            pairs.put("lbLanguage", "");
+            pairs.put("__VIEWSTATEGENERATOR", "92719903");
+            //pairs.put("txtSecretCode",code_txt.getText().toString()));
+            pairs.put("txtSecretCode","");*/
+            
             String info = "";
             try {
                 info = HttpUtil.postUrl(url,
