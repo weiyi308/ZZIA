@@ -1,11 +1,10 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -47,20 +46,22 @@ public class ScoreActivity extends ActionBarActivity {
     List<BasicNameValuePair> parms;
     String viewstate;
     WebView webView;
+    ActionBar actionBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        //textView=(TextView)findViewById(R.id.textview);
         InitStatusBar.InitStatusBar(this,getWindow(),true);
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);
         btn_cx=(Button)findViewById(R.id.btn_cx);
         webView = (WebView) findViewById(R.id.webview);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null){
+            actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         Intent intent = getIntent();
         url=intent.getStringExtra("url");
         header=intent.getStringExtra("header");
@@ -111,8 +112,7 @@ public class ScoreActivity extends ActionBarActivity {
                         webView.getSettings().setSupportZoom(true);
                         webView.getSettings().setBuiltInZoomControls(true);
                         //扩大比例的缩放
-                        webView.getSettings().setUseWideViewPort(true);
-//自适应屏幕
+                        webView.getSettings().setUseWideViewPort(true);//自适应屏幕
                         /*webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
                         webView.getSettings().setLoadWithOverviewMode(true);*/
                         //webView.setInitialScale(70);

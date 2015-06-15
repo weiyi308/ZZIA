@@ -1,5 +1,8 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.TaskStackBuilder;
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rdc.ruan.zzia.Main.R;
+import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 
 public class TestActivity extends ActionBarActivity {
     private ActionBar actionBar;
@@ -14,6 +18,7 @@ public class TestActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        InitStatusBar.InitStatusBar(this,getWindow(),true);
         if (getSupportActionBar() != null){
             actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -39,7 +44,15 @@ public class TestActivity extends ActionBarActivity {
             return true;
         }
         if (id == android.R.id.home){
-
+            Intent upIntent = NavUtils.getParentActivityIntent(this);
+            if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                TaskStackBuilder.create(this)
+                        .addNextIntentWithParentStack(upIntent)
+                        .startActivities();
+            } else {
+                upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                NavUtils.navigateUpTo(this, upIntent);
+            }
             return true;
         }
 

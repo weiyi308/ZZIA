@@ -41,6 +41,9 @@
         <activity
             android:name=".Activity.TestActivity"
             android:label="@string/title_activity_test" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity"/>
         </activity>
     </application>
 
