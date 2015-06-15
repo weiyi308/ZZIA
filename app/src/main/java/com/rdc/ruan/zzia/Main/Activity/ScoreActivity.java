@@ -1,10 +1,12 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +35,7 @@ import java.util.List;
 /***
  * 成绩查询界面
  */
-public class ScoreActivity extends Activity {
+public class ScoreActivity extends ActionBarActivity {
     TextView textView;
     String url,header,userid;
     String content;

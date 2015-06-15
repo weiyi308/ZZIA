@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +20,7 @@ import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 /**
  * 主界面
  */
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     TextView textView;
     Button btn_score,btn_restart;
     Button btn_cet,btn_cTable;

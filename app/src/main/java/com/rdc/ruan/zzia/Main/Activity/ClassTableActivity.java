@@ -1,7 +1,9 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +20,7 @@ import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 /**
  * 课程表查询
  */
-public class ClassTableActivity extends Activity {
+public class ClassTableActivity extends ActionBarActivity {
     String url;
     String selectedYear,SelectedTerm;
     Spinner sp1,sp2;

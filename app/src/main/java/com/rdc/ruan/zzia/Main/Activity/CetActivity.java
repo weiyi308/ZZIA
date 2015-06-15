@@ -1,7 +1,9 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -15,7 +17,7 @@ import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 /**
  * 四六级查询
  */
-public class CetActivity extends Activity {
+public class CetActivity extends ActionBarActivity {
     EditText cetid,name;
     String txt_cetid,txt_name;
     TextView textView;

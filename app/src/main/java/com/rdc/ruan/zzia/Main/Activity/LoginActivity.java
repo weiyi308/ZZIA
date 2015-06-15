@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +39,7 @@ import java.util.List;
 /**
  * 登录界面
  */
-public class LoginActivity extends Activity{
+public class LoginActivity extends ActionBarActivity {
 
     private UserLoginTask mAuthTask = null;
 
@@ -59,8 +60,9 @@ public class LoginActivity extends Activity{
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         // Set up the login form.
         mUserView = (EditText) findViewById(R.id.user);
         //code_txt = (EditText)findViewById(R.id.code_txt);

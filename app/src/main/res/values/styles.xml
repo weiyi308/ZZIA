@@ -1,12 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
 
     </style>
 
-    <style name="my_theme" parent="android:Theme.Holo.Light">
+    <style name="my_theme" parent="Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/my_actionbar_style</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
