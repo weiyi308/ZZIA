@@ -28,9 +28,7 @@
             android:label="@string/title_activity_score" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity"/>
-
-
+                android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity" />
         </activity>
         <activity
             android:name=".Activity.CetActivity"
@@ -39,6 +37,10 @@
         <activity
             android:name=".Activity.ClassTableActivity"
             android:label="@string/title_activity_class_table" >
+        </activity>
+        <activity
+            android:name=".Activity.TestActivity"
+            android:label="@string/title_activity_test" >
         </activity>
     </application>
 

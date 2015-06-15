@@ -14,5 +14,6 @@
     <color name="actionbar_bg">#e0e0e0</color>
     <color name="background">#eeeeee</color>
     <color name="btn_color">#e0e0e0</color>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

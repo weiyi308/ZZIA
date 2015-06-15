@@ -15,7 +15,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class InitStatusBar {
     public static void InitStatusBar(Activity activity,Window window,boolean dark){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
             SystemBarTintManager tintManager = new SystemBarTintManager(activity);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.actionbar_bg);
