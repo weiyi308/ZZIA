@@ -36,28 +36,13 @@
             android:text="查询"/>
     </LinearLayout>
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_material_light"
-        android:id="@+id/webview">
-
-    </WebView>
-    <!--<ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            &lt;!&ndash;<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textview"/>&ndash;&gt;
-            </LinearLayout>
-
-    </ScrollView>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview"/>
+    </ScrollView>
 
 </LinearLayout>

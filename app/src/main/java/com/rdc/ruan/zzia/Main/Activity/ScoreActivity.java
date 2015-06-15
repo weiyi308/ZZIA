@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.rdc.ruan.zzia.Main.AsyncTask.ScorePostTask;
 import com.rdc.ruan.zzia.Main.AsyncTask.ScoreTask;
+import com.rdc.ruan.zzia.Main.HttpUtils.ClassInfo;
 import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 import com.rdc.ruan.zzia.Main.R;
@@ -45,7 +46,6 @@ public class ScoreActivity extends ActionBarActivity {
     Button btn_cx;
     List<BasicNameValuePair> parms;
     String viewstate;
-    WebView webView;
     ActionBar actionBar;
 
 
@@ -53,11 +53,11 @@ public class ScoreActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        InitStatusBar.InitStatusBar(this,getWindow(),true);
+        InitStatusBar.InitStatusBar(this, getWindow(), true);
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);
         btn_cx=(Button)findViewById(R.id.btn_cx);
-        webView = (WebView) findViewById(R.id.webview);
+        textView = (TextView) findViewById(R.id.textview);
         if (getSupportActionBar() != null){
             actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -75,6 +75,8 @@ public class ScoreActivity extends ActionBarActivity {
             public Object Return(Object result) {
                 content = (String)result;
                 //textView.setText(content);
+                if (content.isEmpty())
+                    return null;
                 updateSpinner();
                 return null;
             }
@@ -84,39 +86,16 @@ public class ScoreActivity extends ActionBarActivity {
         btn_cx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                textView.setText("");
                 ScorePostTask scorePostTask=new ScorePostTask(url,selectedYear,selectedTerm,userid);
                 scorePostTask.setCallbackListener(new CallbackListener() {
                     @Override
                     public Object Return(Object result) {
-                        //textView.setText(MyJsoup.getTable((String )result));
-                        webView.loadDataWithBaseURL(null,
-                                "<html>"+"<body>"+"<table border=\"0\" bordercolor=\"Black\">"+
-                                MyJsoup.getTable((String )result)+
-                                        "</table>"+"</body>" + "</html>",
-                                "text/html",
-                                "utf-8",
-                                null);
-                        webView.getSettings().setJavaScriptEnabled(true);
-                        webView.setWebChromeClient(new WebChromeClient());
-                        DisplayMetrics dm = getResources().getDisplayMetrics();
-                        int scale = dm.densityDpi;
-                        if (scale == 240) { //
-                            webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
-                        } else if (scale == 160) {
-                            webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-                        } else {
-                            webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+                        List<ClassInfo> list = MyJsoup.getClassInfos((String) result);
+                        ClassInfo title = list.remove(0);
+                        for (int i=0;i<list.size();i++){
+                            textView.append(list.get(i).toString());
                         }
-                        //webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-                        webView.setHorizontalScrollBarEnabled(false);
-                        webView.getSettings().setSupportZoom(true);
-                        webView.getSettings().setBuiltInZoomControls(true);
-                        //扩大比例的缩放
-                        webView.getSettings().setUseWideViewPort(true);//自适应屏幕
-                        /*webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-                        webView.getSettings().setLoadWithOverviewMode(true);*/
-                        //webView.setInitialScale(70);
-                        //webView.setHorizontalScrollbarOverlay(true);
                         return null;
                     }
                 });
@@ -130,8 +109,7 @@ public class ScoreActivity extends ActionBarActivity {
         year= MyJsoup.getSpinnerYear(content);
         term=MyJsoup.getSpinnerTerm(content);
 
-        //Toast.makeText(this,year[8],Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this,term[2],Toast.LENGTH_SHORT).show();
+
         adapter1=new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,
                 year);

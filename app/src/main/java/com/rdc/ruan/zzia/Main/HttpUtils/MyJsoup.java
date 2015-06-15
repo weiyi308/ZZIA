@@ -6,6 +6,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Ruan on 2015/3/13.
  */
@@ -81,5 +84,26 @@ public class MyJsoup {
             i++;
         }
         return result;
+    }
+    /**
+     * 解析课程表
+     */
+    public static List<ClassInfo> getClassInfos(String string){
+        Document document = Jsoup.parse(string);
+        Elements table = document.select("table.datelist");
+        Elements trs = table.select("tr");
+        List<ClassInfo> list = new ArrayList<>();
+        for (Element tr:trs){
+            Elements item = tr.select("td");
+            String[] tds = new String[item.size()];
+            int i = 0;
+            for (Element td:item){
+                tds[i] = td.text();
+                i++;
+            }
+            ClassInfo classInfo = new ClassInfo(tds);
+            list.add(classInfo);
+        }
+        return list;
     }
 }
