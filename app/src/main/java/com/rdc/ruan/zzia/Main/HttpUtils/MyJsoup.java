@@ -1,6 +1,8 @@
 package com.rdc.ruan.zzia.Main.HttpUtils;
 
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -98,7 +100,11 @@ public class MyJsoup {
             String[] tds = new String[item.size()];
             int i = 0;
             for (Element td:item){
-                tds[i] = td.text();
+                //Log.i("html",td.html());
+                if (td.html().equals("&nbsp;"))
+                    tds[i] = "";
+                else
+                    tds[i] = td.text();
                 i++;
             }
             ClassInfo classInfo = new ClassInfo(tds);

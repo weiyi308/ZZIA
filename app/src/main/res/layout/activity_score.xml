@@ -36,13 +36,32 @@
             android:text="查询"/>
     </LinearLayout>
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview"/>
-    </ScrollView>
+    </ScrollView>-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/black"
+            android:dividerHeight="1dp"
+            android:id="@+id/scoreList">
+
+        </ListView>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:id="@+id/progressbar"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
 
 </LinearLayout>
