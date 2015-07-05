@@ -1,4 +1,4 @@
-package com.rdc.ruan.zzia.Main.HttpUtils;
+package com.rdc.ruan.zzia.Main.Utils;
 
 /**
  * Created by Administrator on 2015/6/15.

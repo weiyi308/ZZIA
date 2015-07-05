@@ -3,13 +3,12 @@ package com.rdc.ruan.zzia.Main.AsyncTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
+import com.rdc.ruan.zzia.Main.Utils.HttpUtil;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package com.rdc.ruan.zzia.Main.HttpUtils;
+package com.rdc.ruan.zzia.Main.Utils;
 
 import android.util.Log;
 
@@ -43,13 +43,6 @@ public class HttpUtil {
         }
         return url;
     }
-
-    /**
-     * 根据Ip地址获取url
-     * @param str
-     * @return
-     * @throws Exception
-     */
 
 
     /**

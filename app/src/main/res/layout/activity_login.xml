@@ -16,6 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             >
             <ImageView
                 android:layout_width="match_parent"
@@ -39,14 +41,20 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/edit_user"
                 android:inputType="number"
+                android:completionThreshold="1"
+                style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>
 
-            <EditText android:id="@+id/password" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:hint="@string/edit_password"
-                android:imeOptions="actionUnspecified" android:inputType="textPassword"
+            <EditText android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_password"
+                style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
                 android:maxLines="1" android:singleLine="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>

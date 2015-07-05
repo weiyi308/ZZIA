@@ -1,4 +1,4 @@
-package com.rdc.ruan.zzia.Main;
+package com.rdc.ruan.zzia.Main.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.rdc.ruan.zzia.Main.HttpUtils.ClassInfo;
+import com.rdc.ruan.zzia.Main.Utils.ClassInfo;
+import com.rdc.ruan.zzia.Main.R;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@ package com.rdc.ruan.zzia.Main.AsyncTask;
 
 import android.os.AsyncTask;
 
-import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
-import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
+import com.rdc.ruan.zzia.Main.Utils.HttpUtil;
+import com.rdc.ruan.zzia.Main.Utils.MyJsoup;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 
 import org.apache.http.impl.client.DefaultHttpClient;

@@ -13,7 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.rdc.ruan.zzia.Main.AsyncTask.ClassTableGetTask;
-import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
+import com.rdc.ruan.zzia.Main.Utils.MyJsoup;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 import com.rdc.ruan.zzia.Main.R;
 

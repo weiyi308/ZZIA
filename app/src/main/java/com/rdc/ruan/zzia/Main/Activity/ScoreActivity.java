@@ -7,14 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,16 +22,14 @@ import android.widget.Toast;
 
 import com.rdc.ruan.zzia.Main.AsyncTask.ScorePostTask;
 import com.rdc.ruan.zzia.Main.AsyncTask.ScoreTask;
-import com.rdc.ruan.zzia.Main.HttpUtils.ClassInfo;
-import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
+import com.rdc.ruan.zzia.Main.Utils.ClassInfo;
+import com.rdc.ruan.zzia.Main.Utils.MyJsoup;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 import com.rdc.ruan.zzia.Main.R;
-import com.rdc.ruan.zzia.Main.ScoreListAdapter;
-import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
+import com.rdc.ruan.zzia.Main.Adapter.ScoreListAdapter;
 
 import org.apache.http.message.BasicNameValuePair;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

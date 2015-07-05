@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
-import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
+import com.rdc.ruan.zzia.Main.Utils.HttpUtil;
+import com.rdc.ruan.zzia.Main.Utils.MyJsoup;
 import com.rdc.ruan.zzia.Main.R;
 
 /**
