@@ -63,7 +63,7 @@ public class ScoreActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        InitStatusBar.InitStatusBar(this, getWindow(), true);
+        //InitStatusBar.InitStatusBar(this, getWindow(), true);
         sp1=(Spinner)findViewById(R.id.sp1);
         sp2=(Spinner)findViewById(R.id.sp2);
         btn_cx=(Button)findViewById(R.id.btn_cx);
@@ -188,9 +188,11 @@ public class ScoreActivity extends ActionBarActivity {
                 float score = 0;
                 String str_score = "";
                 List<Integer> list_count = new ArrayList<>();
+                List<Float> list_credit = new ArrayList<>();
                 List<String> list_type = new ArrayList<>();
                 int total_failed = 0;
                 int restudy = 0;
+                //去重
                 List<ClassInfo> mlist = new ArrayList<>(list);
                 for (int i=0;i<mlist.size();i++){
                     String classID = mlist.get(i).getClassName();
@@ -206,12 +208,16 @@ public class ScoreActivity extends ActionBarActivity {
                 for (int i=0;i<mlist.size();i++){
                     float credit = Float.parseFloat(mlist.get(i).getClassCredit());
                     float gpa = 0;
+                    //自动分类
                     if (!list_type.contains(mlist.get(i).getClassType())) {
                         list_type.add(mlist.get(i).getClassType());
                         list_count.add(1);
+                        list_credit.add(Float.parseFloat(mlist.get(i).getClassCredit()));
                     }else {
                         int current_index = list_type.indexOf(mlist.get(i).getClassType());
                         list_count.set(current_index,list_count.get(current_index)+1);
+                        list_credit.set(current_index,list_credit.get(current_index)+
+                            Float.parseFloat(mlist.get(i).getClassCredit()));
                     }
                     sum_credit = sum_credit +credit;
                     if (!mlist.get(i).getMakeupScore().isEmpty()) {
@@ -255,7 +261,7 @@ public class ScoreActivity extends ActionBarActivity {
                 avg_gpa   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue();*/
                 String str_type = "";
                 for (int i=0;i<list_type.size();i++){
-                    str_type = str_type + list_type.get(i)+":共"+list_count.get(i)+"门\n";
+                    str_type = str_type + list_type.get(i)+":共"+list_count.get(i)+"门 学分:"+list_credit.get(i)+"\n";
                 }
                 new AlertDialog.Builder(this)
                         .setTitle("统计")

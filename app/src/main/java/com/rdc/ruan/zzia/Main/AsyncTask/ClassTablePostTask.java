@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Ruan on 2015/3/18.
  */
-public class ClassTableTask extends AsyncTask {
+public class ClassTablePostTask extends AsyncTask {
     String baseurl,year,term;
     String viewstate;
     List<BasicNameValuePair> pairs=new ArrayList<>();
@@ -23,7 +23,7 @@ public class ClassTableTask extends AsyncTask {
     public void setCallbackListener(CallbackListener callbackListener){
         this.callbackListener=callbackListener;
     }
-    public ClassTableTask(String baseurl,String year,String term) {
+    public ClassTablePostTask(String baseurl, String year, String term) {
         super();
         this.baseurl=baseurl;
         this.term=term;

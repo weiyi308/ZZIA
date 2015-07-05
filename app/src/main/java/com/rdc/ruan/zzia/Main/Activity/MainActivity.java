@@ -1,6 +1,5 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.rdc.ruan.zzia.Main.HttpUtils.HttpUtil;
 import com.rdc.ruan.zzia.Main.HttpUtils.MyJsoup;
 import com.rdc.ruan.zzia.Main.R;
-import com.rdc.ruan.zzia.Main.Utils.InitStatusBar;
 
 /**
  * 主界面
@@ -24,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
     TextView textView;
     Button btn_score,btn_restart;
     Button btn_cet,btn_cTable;
+    private Button btn_detail;
     String temp;
     String name;
     String userid;
@@ -32,22 +31,35 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        InitStatusBar.InitStatusBar(this,getWindow(),true);
+        //InitStatusBar.InitStatusBar(this, getWindow(), true);
         textView = (TextView)findViewById(R.id.textview);
         btn_score = (Button)findViewById(R.id.btn_score);
         btn_restart = (Button)findViewById(R.id.restart);
         btn_cet=(Button)findViewById(R.id.btn_cet);
         btn_cTable=(Button)findViewById(R.id.classtable);
-
+        btn_detail = (Button) findViewById(R.id.btn_detail);
         temp="";
         Bundle bundle =getIntent().getExtras();
         content = bundle.getString("content");
+        if (content.equals("")){
+            return;
+        }
         userid=bundle.getString("id");
         url=bundle.getString("url");
         name= MyJsoup.getName(content);
         setTitle(name);
-        MyJsoup.setMainUrl(HttpUtil.GetCookieUrl(url)+"xs_main.aspx?xh="+userid);
+        MyJsoup.setMainUrl(HttpUtil.GetCookieUrl(url) + "xs_main.aspx?xh=" + userid);
         name=name.replace("同学","");
+        btn_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                foot = "xsgrxx.aspx?xh="+userid+"&xm="+
+                        name+"&gnmkdm=N121618";
+                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                intent.putExtra("url",HttpUtil.GetCookieUrl(url)+foot);
+                startActivity(intent);
+            }
+        });
         btn_score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +77,11 @@ public class MainActivity extends ActionBarActivity {
         btn_cet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,
-                        CetActivity.class));
+                foot = "xsdjkscx.aspx?xh="+userid+"&xm="+
+                        name+"&gnmkdm=N121618";
+                Intent intent = new Intent(MainActivity.this,CetActivity.class);
+                intent.putExtra("url",HttpUtil.GetCookieUrl(url)+foot);
+                startActivity(intent);
             }
         });
         btn_cTable.setOnClickListener(new View.OnClickListener() {

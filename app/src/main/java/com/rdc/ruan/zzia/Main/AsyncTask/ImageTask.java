@@ -2,10 +2,7 @@ package com.rdc.ruan.zzia.Main.AsyncTask;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -21,27 +18,27 @@ public class ImageTask  extends AsyncTask {
     ImageView imageView;
     String url;
     ProgressBar progressBar;
-    public ImageTask(String url,ImageView imageView,ProgressBar progressBar) {
+    public ImageTask(String url,ImageView imageView) {
         super();
         this.url=url;
         this.imageView=imageView;
-        this.progressBar=progressBar;
+        //this.progressBar=progressBar;
     }
 
     @Override
     protected Object doInBackground(Object[] params){
         URL myFileUrl = null;
         Bitmap bitmap = null;
-        char[] cookie=url.toCharArray();
+        /*char[] cookie=url.toCharArray();
         String str="";
         Log.i("Log", url + "====");
         for (int i=0;i<50;i++){
             str+=cookie[i];
         }
-        str=str+"CheckCode.aspx";
+        str=str+"CheckCode.aspx";*/
 
         try {
-            myFileUrl = new URL(str);
+            myFileUrl = new URL(url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -70,14 +67,15 @@ public class ImageTask  extends AsyncTask {
          * Bitmap缩放2倍
          */
         Bitmap temp =(Bitmap)o;
-        Matrix matrix = new Matrix();
+        /*Matrix matrix = new Matrix();
         matrix.postScale(2,2);
         Bitmap bitmap = Bitmap.createBitmap(temp, 0, 0, temp.getWidth(), temp.getHeight(),
                 matrix, true);
-        imageView.setImageBitmap(bitmap);
+        imageView.setImageBitmap(bitmap);*/
+        imageView.setImageBitmap(temp);
         imageView.setAlpha(100f);
         //imageView.setImageBitmap((Bitmap)o);
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 
     @Override

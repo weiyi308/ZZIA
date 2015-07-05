@@ -1,7 +1,5 @@
 package com.rdc.ruan.zzia.Main.Activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +8,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,14 +62,9 @@ public class LoginActivity extends ActionBarActivity {
         if (getSupportActionBar()!=null){
             getSupportActionBar().hide();
         }
-        // Set up the login form.
         mUserView = (EditText) findViewById(R.id.user);
-        //code_txt = (EditText)findViewById(R.id.code_txt);
         mPasswordView = (EditText) findViewById(R.id.password);
         imageView = (ImageView)findViewById(R.id.image);
-        view = findViewById(R.id.login_form);
-        //progressBar = (ProgressBar)findViewById(R.id.progress);
-        //btn_radio = (RadioButton) findViewById(R.id.rad_rember);
         imageTask =null;
 
         UrlTask urlTask = new UrlTask("http://202.196.166.138");
@@ -89,12 +83,6 @@ public class LoginActivity extends ActionBarActivity {
                     if (!userid.isEmpty()&&!password.isEmpty()){
                         mUserView.setText(userid);
                         mPasswordView.setText(password);
-                        //preferences=getSharedPreferences("user",Context.MODE_PRIVATE);
-                    /*SharedPreferences.Editor editor=preferences.edit();
-                    editor.putString("userid", userid);
-                    editor.putString("password", password);
-                    editor.commit();
-                    */
                         mAuthTask = new UserLoginTask(userid, password);
                         progressDialog = ProgressDialog.show(LoginActivity.this,"自动登录...","请稍候",true,false);
                         mAuthTask.execute((Void) null);
@@ -173,6 +161,7 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
     private void Verifi(String result){
+        Log.i("result",result);
         if (result==""){
             Toast.makeText(LoginActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
@@ -191,14 +180,14 @@ public class LoginActivity extends ActionBarActivity {
                 imageTask=null;
             //eImageTask();
             Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
-        }/*else if (result.indexOf("验证码不正确")!=-1){
+        }else if (result.indexOf("ERROR - 出错啦")!=-1){
             progressDialog.dismiss();
             code_txt.setText("");
             if (imageTask!=null)
                 imageTask=null;
             //eImageTask();
-            Toast.makeText(LoginActivity.this,"验证码不正确",Toast.LENGTH_SHORT).show();
-        }*/
+            Toast.makeText(LoginActivity.this,"请重新登陆，如无法解决，请稍后再试",Toast.LENGTH_SHORT).show();
+        }
         else {
             SharedPreferences preferences=getApplicationContext().getSharedPreferences("user",Context.MODE_PRIVATE);
             SharedPreferences.Editor editor=preferences.edit();

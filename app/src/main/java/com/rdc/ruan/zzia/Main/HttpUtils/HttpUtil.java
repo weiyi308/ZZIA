@@ -1,5 +1,7 @@
 package com.rdc.ruan.zzia.Main.HttpUtils;
 
+import android.util.Log;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -82,6 +84,7 @@ public class HttpUtil {
 		HttpGet request = new HttpGet(url);
 		request.setHeader("Referer", setHeader);
 		HttpResponse response = httpClient.execute(request);
+		Log.i("statuscode",response.getStatusLine().getStatusCode()+"");
 		if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 			return EntityUtils.toString(response.getEntity());
 		} else {
