@@ -45,20 +45,6 @@
                 android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity" />
         </activity>
         <activity
-            android:name=".Activity.TestActivity"
-            android:label="@string/title_activity_test" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity" />
-        </activity>
-        <activity
-            android:name=".Activity.CxffActivity"
-            android:label="@string/title_activity_detail" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rdc.ruan.zzia.Main.Activity.MainActivity" />
-        </activity>
-        <activity
             android:name=".Activity.DetailActivity"
             android:label="@string/title_activity_detail" >
             <meta-data
