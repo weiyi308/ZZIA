@@ -174,18 +174,20 @@ public class ScoreActivity extends ActionBarActivity {
                     NavUtils.navigateUpTo(this, upIntent);
                 }
                 return true;
+            //统计数据
             case R.id.action_count:
                 if (list == null)
                     return true;
-                float sum_credit = 0;
-                float sum_gpa = 0;
-                float score = 0;
+                float sum_credit = 0;//学分总和
+                float sum_gpa = 0;//绩点总和
+                float score = 0;//分数
+                float sum_score = 0;//分数总和
                 String str_score = "";
                 List<Integer> list_count = new ArrayList<>();
                 List<Float> list_credit = new ArrayList<>();
                 List<String> list_type = new ArrayList<>();
-                int total_failed = 0;
-                int restudy = 0;
+                int total_failed = 0;//补考数
+                int restudy = 0;//重修数
                 //去重
                 List<ClassInfo> mlist = new ArrayList<>(list);
                 for (int i=0;i<mlist.size();i++){
@@ -200,8 +202,8 @@ public class ScoreActivity extends ActionBarActivity {
 
 
                 for (int i=0;i<mlist.size();i++){
-                    float credit = Float.parseFloat(mlist.get(i).getClassCredit());
-                    float gpa = 0;
+                    float credit = Float.parseFloat(mlist.get(i).getClassCredit());//学分
+                    float gpa = 0;//绩点
                     //自动分类
                     if (!list_type.contains(mlist.get(i).getClassType())) {
                         list_type.add(mlist.get(i).getClassType());
@@ -225,32 +227,42 @@ public class ScoreActivity extends ActionBarActivity {
                     }
                     switch (str_score){
                         case "优秀":
-                            score = 4.5f;
+                            score = 95f;
+                            gpa = 4.5f;
                             break;
                         case "良好":
-                            score = 3.5f;
+                            score = 85f;
+                            gpa = 3.5f;
                             break;
                         case "中等":
-                            score = 2.5f;
+                            score = 75f;
+                            gpa = 2.5f;
                             break;
                         case "及格":
-                            score = 1.5f;
+                            score = 65f;
+                            gpa = 1.5f;
                             break;
                         case "不及格":
                             score = 0;
+                            gpa = 0;
                             break;
                         default:
                             score = Float.parseFloat(str_score);
                             if (score<60){
                                 total_failed++;
                             }
-                            score = (float)((int)score/10-5+(int)score%10*0.1);
+                            //score = (float)((int)score/10-5+(int)score%10*0.1);
+                            gpa = (float)((int)score/10-5+(int)score%10*0.1);
                             Log.i("score",score+"");
                     }
-                    gpa = score*credit;
-                    sum_gpa = sum_gpa+gpa;
+                    //gpa = score*credit;
+                    sum_score = sum_score + score;
+                    sum_gpa = sum_gpa+gpa*credit;//平均绩点=学分*单科绩点求和然后除以学分总和
                 }
+                //平均绩点
                 float avg_gpa = sum_gpa/sum_credit;
+                //平均分数
+                float avg_score = sum_score/mlist.size();
                 /*BigDecimal b   =   new   BigDecimal(avg_gpa);
                 avg_gpa   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue();*/
                 String str_type = "";
@@ -262,6 +274,7 @@ public class ScoreActivity extends ActionBarActivity {
                         .setMessage(str_type+"\n"
                                 +"共"+mlist.size()+"门课"+"\n"
                                 +"总学分:"+sum_credit+"\n"
+                                +"平均分数:"+avg_score+"\n"
                                 +"平均绩点:"+avg_gpa+"\n"
                                 +"挂科数:"+total_failed+"\n"
                                 +"重修数:"+restudy+"\n")
