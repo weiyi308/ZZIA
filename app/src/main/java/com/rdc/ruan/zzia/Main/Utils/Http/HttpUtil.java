@@ -1,4 +1,4 @@
-package com.rdc.ruan.zzia.Main.Utils;
+package com.rdc.ruan.zzia.Main.Utils.Http;
 
 import android.util.Log;
 
@@ -146,5 +146,4 @@ public class HttpUtil {
 		}
 
 	}
-
-}
+ }

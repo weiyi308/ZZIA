@@ -2,7 +2,7 @@ package com.rdc.ruan.zzia.Main.AsyncTask;
 
 import android.os.AsyncTask;
 
-import com.rdc.ruan.zzia.Main.Utils.HttpUtil;
+import com.rdc.ruan.zzia.Main.Utils.Http.HttpUtil;
 import com.rdc.ruan.zzia.Main.Interface.CallbackListener;
 
 

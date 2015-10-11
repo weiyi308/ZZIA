@@ -1,5 +1,6 @@
 package com.rdc.ruan.zzia.Main.DateBase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,6 +46,14 @@ public class DBManager {
             return cursor.getString(cursor.getColumnIndex("password"));
         }
         return "";
+    }
+    public void delete(String id){
+        db.delete("user","_id == ?",new String[]{id});
+    }
+    public void update(String id,String password){
+        ContentValues cv = new ContentValues();
+        cv.put("password",password);
+        db.update("user",cv,"_id == ?",new String[]{id});
     }
     public void closeDB(){
         db.close();

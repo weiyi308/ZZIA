@@ -1,41 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    tools:context="com.rdc.ruan.zzia.Main.Activity.ClassTableActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
+    <ProgressBar
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@color/actionbar_bg">
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp1"
-            >
+        android:id="@+id/progressbar"
+        android:layout_gravity="center"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
+        android:id="@+id/listview_table">
+    </android.support.v7.widget.RecyclerView>
 
-        </Spinner>
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/sp2"
-            >
 
-        </Spinner>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_cx"
-
-            android:text="查询"/>
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp">
         <TextView
             android:id="@+id/tv1"
             android:layout_width="0dp"
@@ -77,21 +64,33 @@
             android:layout_height="wrap_content"
             android:text="上课时间" />
 
-
     </LinearLayout>
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview_table">
-
-    </ListView>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/actionbar_bg">
+        <Spinner
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textview"/>
-        </ScrollView>
+            android:id="@+id/sp1"
+            >
 
-</LinearLayout>
+        </Spinner>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp2"
+            >
+
+        </Spinner>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_cx"
+            android:background="@android:color/transparent"
+            android:text="查询"/>
+    </LinearLayout>
+
+</FrameLayout>

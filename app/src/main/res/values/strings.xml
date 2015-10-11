@@ -3,7 +3,7 @@
 
     <string name="app_name">郑航</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">设置</string>
+    <string name="action_settings">重新登录</string>
     <string name="title_activity_main">郑航</string>
     <string name="title_activity_score">成绩查询</string>
     <string name="title_activity_cet">四六级查询</string>
@@ -15,5 +15,10 @@
     <color name="btn_color">#e0e0e0</color>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_detail">个人信息</string>
+    <string name="title_activity_activity_base">ActivityBase</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main_fragment">MainFragmentActivity</string>
 
 </resources>
