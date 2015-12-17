@@ -34,12 +34,18 @@ public class HttpManager {
     }
 
 
-    public void login(String username,String password){
+    public void login(String username,String password,String code){
+        headers.put("Referer",MyApp.getZziaUrlWithcookie());
         params.put("txtUserName",username);
         params.put("TextBox2",password);
         params.put("__VIEWSTATE", Constant.VIEW_STATE);
+        params.put("__VIEWSTATEGENERATOR","92719903");
+        params.put("RadioButtonList1","%D1%A7%C9%FA");
+        params.put("txtSecretCode",code);
         params.put("Button1","");
         params.put("lbLanguage","");
+        params.put("hidPdrs","");
+        params.put("hidsc","");
         Log.e("url=",MyApp.getZziaUrlWithcookie());
         doPost(MyApp.getZziaUrlWithcookie(), Constant.TAG_LOGIN);
     }
@@ -55,7 +61,7 @@ public class HttpManager {
         doPost(MyJsoup.getScoreUrl(),Constant.TAG_SCORE);
 
     }
-    public void postScore(String year,String term,ProgressBar progressBar){
+    /*public void postScore(String year,String term,ProgressBar progressBar){
         headers.put("Referer",MyJsoup.getMainUrl());
         params.put("__EVENTTARGET","");
         params.put("__EVENTARGUMENT","");
@@ -64,6 +70,20 @@ public class HttpManager {
         params.put("ddlxn",year);
         params.put("__VIEWSTATE",MyJsoup.SCORE_VIEWSTATE);
         params.put("__VIEWSTATEGENERATOR", "EC2DE6FD");
+        Log.e("year=",term+year);
+        Log.e("url=",MyJsoup.getScoreUrl());
+        this.progressBar = progressBar;
+        doPost(MyJsoup.getScoreUrl(), Constant.TAG_POST_SCORE);
+    }*/
+    public void postScore(String year,String term,ProgressBar progressBar){
+        headers.put("Referer",MyJsoup.getScoreUrl());
+        params.put("txtQSCJ","0");
+        params.put("txtZZCJ","100");
+        params.put("Button2","%D4%DA%D0%A3%D1%A7%CF%B0%B3%C9%BC%A8%B2%E9%D1%AF");
+        params.put("ddlXQ",term);
+        params.put("ddlXN",year);
+        params.put("__VIEWSTATE",MyJsoup.SCORE_VIEWSTATE);
+        params.put("__VIEWSTATEGENERATOR", "8963BEEC");
         Log.e("year=",term+year);
         Log.e("url=",MyJsoup.getScoreUrl());
         this.progressBar = progressBar;

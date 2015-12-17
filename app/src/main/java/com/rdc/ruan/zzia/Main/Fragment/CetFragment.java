@@ -130,7 +130,7 @@ public class CetFragment extends Fragment implements SwipeRefreshLayout.OnRefres
             public void requestError(Object tag, VolleyError e) {
                 String msg =e.getMessage();
                 if (msg.equals("reconnect")){
-                    httpManager.login(MyApp.getUser(),MyApp.getPassword());
+                    httpManager.login(MyApp.getUser(),MyApp.getPassword(),"");
                 }
             }
         };

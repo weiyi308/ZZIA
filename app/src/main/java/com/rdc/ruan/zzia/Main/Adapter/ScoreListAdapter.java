@@ -35,14 +35,14 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         ClassInfo classInfo = list.get(i);
-        viewHolder.year.setText(classInfo.getYear()+"-"+classInfo.getTerm());
+        //viewHolder.year.setText(classInfo.getYear()+"-"+classInfo.getTerm());
         viewHolder.className.setText(classInfo.getClassName());
         viewHolder.type.setText(classInfo.getClassType());
         viewHolder.credit.setText(classInfo.getClassCredit());
         String makeupScore = "(" + classInfo.getMakeupScore()+")";
         if (classInfo.getMakeupScore().isEmpty())
             makeupScore = "";
-        viewHolder.score.setText(classInfo.getTotalScore()+makeupScore);
+        viewHolder.score.setText(classInfo.getScore()+makeupScore);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.year = (TextView) itemView.findViewById(R.id.text_year);
+            //this.year = (TextView) itemView.findViewById(R.id.text_year);
             this.className = (TextView) itemView.findViewById(R.id.text_className);
             this.type = (TextView) itemView.findViewById(R.id.text_type);
             this.credit = (TextView) itemView.findViewById(R.id.text_credit);

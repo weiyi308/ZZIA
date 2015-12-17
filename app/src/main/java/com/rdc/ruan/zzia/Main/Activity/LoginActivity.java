@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ import com.rdc.ruan.zzia.Main.Interface.RequestListener;
 import com.rdc.ruan.zzia.Main.MyApp;
 import com.rdc.ruan.zzia.Main.R;
 import com.rdc.ruan.zzia.Main.Utils.Constant;
+import com.rdc.ruan.zzia.Main.Utils.Http.HttpUtil;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -33,11 +36,12 @@ import com.rdc.ruan.zzia.Main.Utils.Constant;
  */
 public class LoginActivity extends ActivityBase {
     private AutoCompleteTextView mUserView;
-    private EditText mPasswordView;
+    private EditText mPasswordView,et_code;
     private ProgressDialog progressDialog;
     private String url;
     private String userid,password;
     private DBManager dbManager;
+    private ImageView iv_code;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,8 @@ public class LoginActivity extends ActivityBase {
         dbManager = new DBManager(this);
         mUserView = (AutoCompleteTextView) this.findViewById(R.id.user);
         mPasswordView = (EditText) findViewById(R.id.password);
+        et_code = (EditText) findViewById(R.id.et_code);
+        iv_code = (ImageView) findViewById(R.id.iv_code);
     }
 
     @Override
@@ -116,11 +122,16 @@ public class LoginActivity extends ActivityBase {
         urlTask.setCallbackListener(new CallbackListener() {
             @Override
             public Object Return(Object result) {
+
                 url = (String)result;
+                Log.i("url",url);
                 if (url.length()<50){
                     Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                 }else {
                     MyApp.setZziaUrlWithcookie(url);
+                    Picasso.with(getApplicationContext())
+                            .load(HttpUtil.GetCookieUrl(url)+"CheckCode.aspx")
+                            .into(iv_code);
                     SharedPreferences preferences=getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                     /*String userid=preferences.getString("userid", "");
                     String password=preferences.getString("password", "");*/
@@ -182,7 +193,7 @@ public class LoginActivity extends ActivityBase {
         else {
             MyApp.setUser(userid);
             MyApp.setPassword(password);
-            httpManager.login(userid,password);
+            httpManager.login(userid,password,et_code.getText().toString());
             //mAuthTask = new UserLoginTask(userid, password);
             progressDialog = ProgressDialog.show(LoginActivity.this,"正在登录...","请稍候",true,false);
             //mAuthTask.execute((Void) null);

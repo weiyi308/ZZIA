@@ -58,6 +58,24 @@
                 android:maxLines="1" android:singleLine="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="27dp"
+                    android:id="@+id/iv_code"
+                    android:scaleType="fitXY"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+                <EditText
+                    android:layout_toRightOf="@id/iv_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_code"/>
+            </RelativeLayout>
             <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

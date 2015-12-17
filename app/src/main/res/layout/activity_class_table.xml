@@ -70,6 +70,7 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center"
+        android:visibility="gone"
         android:background="@color/actionbar_bg">
         <Spinner
             android:layout_width="wrap_content"

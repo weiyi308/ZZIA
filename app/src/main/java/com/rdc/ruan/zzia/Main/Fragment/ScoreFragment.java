@@ -186,7 +186,7 @@ public class ScoreFragment extends Fragment {
                 }
             }
             else {
-                str_score = mlist.get(i).getTotalScore();
+                str_score = mlist.get(i).getScore();
             }
             switch (str_score){
                 case "优秀":
@@ -247,8 +247,8 @@ public class ScoreFragment extends Fragment {
 
     public void initData(){
         httpManager = new HttpManager(getActivity(),requestListener());
-        httpManager.getScore(MyJsoup.getMainUrl(),progressBar);
-        //httpManager.postScore("全部","全部");
+        //httpManager.getScore(MyJsoup.getMainUrl(),progressBar);
+        httpManager.postScore("","",progressBar);
     }
 
     public RequestListener requestListener(){
@@ -263,6 +263,7 @@ public class ScoreFragment extends Fragment {
                     updateSpinner();
                 }
                 if (tag.equals(Constant.TAG_POST_SCORE)){
+                    Log.i("score=",result);
                     list = MyJsoup.getClassInfos(result);
                     ClassInfo title = list.remove(0);
                         /*for (int i=0;i<list.size();i++){
