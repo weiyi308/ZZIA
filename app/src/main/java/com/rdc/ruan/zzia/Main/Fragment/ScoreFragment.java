@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,6 +166,7 @@ public class ScoreFragment extends Fragment {
             }
         }
         for (int i=0;i<mlist.size();i++){
+            Log.i("List",mlist.get(i).toString());
             float credit = Float.parseFloat(mlist.get(i).getClassCredit());//学分
             float gpa = 0;//绩点
             //自动分类
@@ -178,16 +180,35 @@ public class ScoreFragment extends Fragment {
                 list_credit.set(current_index,list_credit.get(current_index)+
                         Float.parseFloat(mlist.get(i).getClassCredit()));
             }
+            //学分求和
             sum_credit = sum_credit +credit;
-            if (!mlist.get(i).getMakeupScore().isEmpty()) {
-                str_score = mlist.get(i).getMakeupScore();
+            if (!mlist.get(i).getChongxiuScore().isEmpty()) {
+                str_score = mlist.get(i).getChongxiuScore();
                 if (Float.parseFloat(str_score)>=60) {
                     total_failed++;
                 }
             }
-            else {
+            if (!TextUtils.isEmpty(mlist.get(i).getChongxiuScore())){
+                if (Float.parseFloat(mlist.get(i).getChongxiuScore())<60)
+                    str_score = "0";
+                else {
+                    str_score = mlist.get(i).getChongxiuScore();
+                    restudy++;
+                }
+            }else if (!TextUtils.isEmpty(mlist.get(i).getBukaoScore())){
+                if (Float.parseFloat(mlist.get(i).getBukaoScore())<60){
+                    str_score = "0";
+                }else {
+                    str_score = mlist.get(i).getBukaoScore();
+                    total_failed++;
+                }
+            }else {
                 str_score = mlist.get(i).getScore();
             }
+            /*if (TextUtils.isEmpty(mlist.get(i).getBukaoScore()))
+            else {
+                str_score = mlist.get(i).getScore();
+            }*/
             switch (str_score){
                 case "优秀":
                     score = 95f;
@@ -230,7 +251,8 @@ public class ScoreFragment extends Fragment {
                 avg_gpa   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).floatValue();*/
         String str_type = "";
         for (int i=0;i<list_type.size();i++){
-            str_type = str_type + list_type.get(i)+":共"+list_count.get(i)+"门 学分:"+list_credit.get(i)+"\n";
+            str_type = str_type + list_type.get(i)
+                    +":共"+list_count.get(i)+"门 学分:"+list_credit.get(i)+"\n";
         }
         new AlertDialog.Builder(getActivity())
                 .setTitle("统计")

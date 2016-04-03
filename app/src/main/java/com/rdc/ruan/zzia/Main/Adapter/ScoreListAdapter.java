@@ -2,6 +2,7 @@ package com.rdc.ruan.zzia.Main.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,27 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.View
         viewHolder.className.setText(classInfo.getClassName());
         viewHolder.type.setText(classInfo.getClassType());
         viewHolder.credit.setText(classInfo.getClassCredit());
-        String makeupScore = "(" + classInfo.getMakeupScore()+")";
-        if (classInfo.getMakeupScore().isEmpty())
-            makeupScore = "";
-        viewHolder.score.setText(classInfo.getScore()+makeupScore);
+        String score = "";
+        if (!TextUtils.isEmpty(classInfo.getChongxiuScore())){
+            if (Float.parseFloat(classInfo.getChongxiuScore())<60)
+                score = "0";
+            else
+                score = classInfo.getScore() +
+                        "("+classInfo.getBukaoScore()+")"+
+                        "("+classInfo.getChongxiuScore()+")";
+        }else if (!TextUtils.isEmpty(classInfo.getBukaoScore())){
+            if (Float.parseFloat(classInfo.getBukaoScore())<60){
+                score = "0";
+            }else
+                score = classInfo.getScore() +
+                        "("+classInfo.getBukaoScore()+")";
+        }else {
+            score = classInfo.getScore();
+        }
+        /*String bukaoScore = "(" + classInfo.getChongxiuScore()+")";
+        if (classInfo.getChongxiuScore().isEmpty())
+            bukaoScore = "";*/
+        viewHolder.score.setText(score);
     }
 
     @Override
@@ -76,8 +94,8 @@ public class ScoreListAdapter extends RecyclerView.Adapter<ScoreListAdapter.View
         viewHolder.className.setText(classInfo.getClassName());
         viewHolder.type.setText(classInfo.getClassType());
         viewHolder.credit.setText(classInfo.getClassCredit());
-        String makeupScore = "(" + classInfo.getMakeupScore()+")";
-        if (classInfo.getMakeupScore().isEmpty())
+        String makeupScore = "(" + classInfo.getChongxiuScore()+")";
+        if (classInfo.getChongxiuScore().isEmpty())
             makeupScore = "";
         viewHolder.score.setText(classInfo.getTotalScore()+makeupScore);
         return convertView;

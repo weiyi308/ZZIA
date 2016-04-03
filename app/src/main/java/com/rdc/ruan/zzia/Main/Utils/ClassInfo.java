@@ -1,5 +1,7 @@
 package com.rdc.ruan.zzia.Main.Utils;
 
+import android.util.Log;
+
 /**
  * Created by Administrator on 2015/6/15.
  */
@@ -14,9 +16,9 @@ public class ClassInfo {
     private String score;
     //private String midScore;
     private String finalScore;
-    private String experScore;
+    private String bukaoScore;//补考成绩
     //private String totalScore;
-    private String makeupScore;
+    private String chongxiuScore;//重修成绩
     //private String isRestudy;
     //private String collage;
     //private String notes;
@@ -27,13 +29,15 @@ public class ClassInfo {
         /*year = strings[i++];
         term = strings[i++];*/
         classID = strings[i++];
+
         className = strings[i++];
         classType = strings[i++];
         finalScore = strings[i++];
         score = strings[i++];
         classOf = strings[i++];
-        experScore = strings[i++];
-        makeupScore = strings[i++];
+        bukaoScore = strings[i++];
+        Log.i("classID", bukaoScore);
+        chongxiuScore = strings[i++];
         classCredit = strings[i++];
         makeupNotes = strings[i++];
         /*midScore = strings[i++];
@@ -57,8 +61,8 @@ public class ClassInfo {
         finalScore = strings[i++];
         score = strings[i++];
         classOf = strings[i++];
-        experScore = strings[i++];
-        makeupScore = strings[i++];
+        bukaoScore = strings[i++];
+        chongxiuScore = strings[i++];
         classCredit = strings[i++];
         makeupNotes = strings[i++];
         /*//year = strings[i++];
@@ -71,9 +75,9 @@ public class ClassInfo {
         score = strings[i++];
         //midScore = strings[i++];
         finalScore = strings[i++];
-        experScore = strings[i++];
+        bukaoScore = strings[i++];
         //totalScore = strings[i++];
-        makeupScore = strings[i++];
+        chongxiuScore = strings[i++];
         //isRestudy = strings[i++];
         //collage = strings[i++];
         //notes = strings[i++];
@@ -92,9 +96,9 @@ public class ClassInfo {
                 score +" "+
                 //midScore+" "+
         finalScore+" "+
-        experScore+" "+
+                bukaoScore +" "+
         //totalScore+" "+
-        makeupScore+" "+
+                chongxiuScore +" "+
         //isRestudy+" "+
         //collage+" "+
         //notes+" "+
@@ -157,20 +161,20 @@ public class ClassInfo {
         this.finalScore = finalScore;
     }
 
-    public String getExperScore() {
-        return experScore;
+    public String getBukaoScore() {
+        return bukaoScore;
     }
 
-    public void setExperScore(String experScore) {
-        this.experScore = experScore;
+    public void setBukaoScore(String bukaoScore) {
+        this.bukaoScore = bukaoScore;
     }
 
-    public String getMakeupScore() {
-        return makeupScore;
+    public String getChongxiuScore() {
+        return chongxiuScore;
     }
 
-    public void setMakeupScore(String makeupScore) {
-        this.makeupScore = makeupScore;
+    public void setChongxiuScore(String chongxiuScore) {
+        this.chongxiuScore = chongxiuScore;
     }
 
     public String getMakeupNotes() {
